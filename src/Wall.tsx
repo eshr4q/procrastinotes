@@ -55,10 +55,12 @@ const Wall: React.FC = () => {
 
   return (
     <div
-      className="p-4 max-w-4xl mx-auto bg-gray-100 relative"
-      style={{ height: "80vh" }}
+      className="p-4 max-w-5xl mx-auto bg-gray-50 shadow-md rounded-md relative"
+      style={{ height: "90vh" }}
     >
-      <h1 className="text-2xl font-bold mb-4 text-center">Wall</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">
+        Sticky Notes Wall
+      </h1>
       <AddNoteForm onAddNote={addNote} />
       {notes.map((note) => (
         <Note

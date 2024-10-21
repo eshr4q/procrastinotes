@@ -27,7 +27,7 @@ const Note: React.FC<NoteProps> = ({
   onDelete,
   onUpdate,
 }) => {
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedContent, setEditedContent] = useState(content);
   const [noteColor, setNoteColor] = useState("bg-yellow-200");
@@ -46,8 +46,13 @@ const Note: React.FC<NoteProps> = ({
     }
   }, [deadline]);
 
-  const handleSave = () => {
-    setEditMode(false);
+  // const handleSave = () => {
+  //   setEditMode(false);
+  //   onUpdate(id, editedTitle, editedContent);
+  // };
+
+  // Handle title and content update when the inputs lose focus
+  const handleBlur = () => {
     onUpdate(id, editedTitle, editedContent);
   };
 
@@ -63,45 +68,33 @@ const Note: React.FC<NoteProps> = ({
       onDragStop={(e, data) => {
         onDragStop(id, data.x, data.y);
       }}
-      className={`${noteColor} p-2 rounded shadow-md cursor-move`}
+      className={`${noteColor} p-3 rounded shadow-lg cursor-move`}
     >
-      {editMode ? (
-        <div>
-          <input
-            type="text"
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-            className="border p-1 mb-2 w-full"
-          />
-          <textarea
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-            className="border p-1 mb-2 w-full"
-          />
-          <button onClick={handleSave} className="bg-green-500 text-white p-1">
-            Save
-          </button>
+      <div className="flex flex-col space-y-2">
+        <input
+          type="text"
+          value={editedTitle}
+          onChange={(e) => setEditedTitle(e.target.value)}
+          onBlur={handleBlur}
+          className="border p-1 rounded w-full text-sm font-semibold bg-transparent focus:outline-none focus:border-blue-400"
+        />
+        <textarea
+          value={editedContent}
+          onChange={(e) => setEditedContent(e.target.value)}
+          onBlur={handleBlur}
+          className="border p-1 rounded w-full h-24 resize-none bg-transparent focus:outline-none focus:border-blue-400"
+        />
+        <div className="text-xs text-gray-600 mt-2">
+          <p>Created: {creationDate}</p>
+          <p>Deadline: {deadline}</p>
         </div>
-      ) : (
-        <div>
-          <h3 className="font-bold">{editedTitle}</h3>
-          <p>{editedContent}</p>
-          <p className="text-xs text-gray-500">Created: {creationDate}</p>
-          <p className="text-xs text-gray-500">Deadline: {deadline}</p>
-          <button
-            onClick={() => setEditMode(true)}
-            className="bg-blue-500 text-white p-1 mr-2"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => onDelete(id)}
-            className="bg-red-500 text-white p-1"
-          >
-            Delete
-          </button>
-        </div>
-      )}
+        <button
+          onClick={() => onDelete(id)}
+          className="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600"
+        >
+          Delete
+        </button>
+      </div>
     </Rnd>
   );
 };

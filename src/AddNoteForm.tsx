@@ -16,7 +16,7 @@ const AddNoteForm: React.FC<AddNoteFormProps> = ({ onAddNote }) => {
     e.preventDefault();
 
     // Make sure all fields are filled before adding a note
-    if (title.trim() && content.trim() && deadline) {
+    if (deadline) {
       // Call the parent function to add the note
       onAddNote(title, content, deadline);
 
@@ -32,22 +32,6 @@ const AddNoteForm: React.FC<AddNoteFormProps> = ({ onAddNote }) => {
       onSubmit={handleSubmit}
       className="mb-4 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-2"
     >
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="border p-2 rounded w-full md:w-auto"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="border p-2 rounded w-full md:w-auto"
-        required
-      />
       <input
         type="date"
         value={deadline}
