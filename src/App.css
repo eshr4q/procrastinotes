@@ -1,0 +1,34 @@
+.note-container {
+  transition: background-color 0.3s ease;
+}
+
+.note-red {
+  background-color: #fecaca; 
+}
+
+.note-yellow {
+  background-color: #fef3c7; 
+}
+
+
+.note-delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #161414;
+  font-size: 1.25rem;
+}
+
+.note-delete-btn:hover {
+  color: #b91c1c;
+}
+
+
+
+.note-textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 60px; 
+  resize: vertical;
+}
